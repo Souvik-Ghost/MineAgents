@@ -6,14 +6,18 @@ from settings import *
 class Player(Camera):
     def __init__(self, app, position=PLAYER_POS, yaw=-90, pitch=0):
         self.app = app
+        self.bot_mode = BOT_MODE
         super().__init__(position, yaw, pitch)
 
     def update(self):
-        self.keyboard_control()
-        self.mouse_control()
+        if not self.bot_mode:
+            self.keyboard_control()
+            self.mouse_control()
         super().update()
 
     def handle_event(self, event):
+        if self.bot_mode:
+            return
         # adding and removing voxels with clicks
         if event.type == pg.MOUSEBUTTONDOWN:
             voxel_handler = self.app.scene.world.voxel_handler

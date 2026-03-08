@@ -81,3 +81,10 @@ WATER_AREA = 5 * CHUNK_SIZE * WORLD_W
 # cloud
 CLOUD_SCALE = 25
 CLOUD_HEIGHT = WORLD_H * CHUNK_SIZE * 2
+
+# bot / LLM settings
+BOT_MODE = False
+LLM_URL = 'http://localhost:11434'
+LLM_MODEL = 'tinyllama'
+LLM_DECISION_INTERVAL = 2.5  # seconds between LLM queries
+

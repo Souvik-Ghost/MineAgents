@@ -27,8 +27,17 @@ class VoxelEngine:
         self.delta_time = 0
         self.time = 0
 
-        pg.event.set_grab(True)
-        pg.mouse.set_visible(False)
+        # Check for --bot flag
+        self.bot_mode = '--bot' in sys.argv
+        if self.bot_mode:
+            import settings as s
+            s.BOT_MODE = True
+            pg.display.set_caption('MineAgents - BOT MODE')
+            pg.event.set_grab(False)
+            pg.mouse.set_visible(True)
+        else:
+            pg.event.set_grab(True)
+            pg.mouse.set_visible(False)
 
         self.is_running = True
         self.on_init()
@@ -36,22 +45,51 @@ class VoxelEngine:
     def on_init(self):
         self.textures = Textures(self)
         self.player = Player(self)
+        if self.bot_mode:
+            self.player.bot_mode = True
         self.shader_program = ShaderProgram(self)
         self.scene = Scene(self)
+
+        # Initialize AI agent if in bot mode
+        self.ai_agent = None
+        if self.bot_mode:
+            from ai_agent import AIAgent
+            self.ai_agent = AIAgent(self)
+            self.ai_agent.start()
+            # Initialize pygame font for HUD
+            pg.font.init()
 
     def update(self):
         self.player.update()
         self.shader_program.update()
         self.scene.update()
 
+        # Update AI agent
+        if self.ai_agent:
+            self.ai_agent.update()
+
         self.delta_time = self.clock.tick()
         self.time = pg.time.get_ticks() * 0.001
-        pg.display.set_caption(f'{self.clock.get_fps() :.0f}')
+
+        if self.bot_mode:
+            status = self.ai_agent.llm_status if self.ai_agent else 'N/A'
+            action = self.ai_agent.current_action if self.ai_agent else 'N/A'
+            pg.display.set_caption(
+                f'MineAgents BOT | FPS: {self.clock.get_fps():.0f} | {action} | LLM: {status}'
+            )
+        else:
+            pg.display.set_caption(f'{self.clock.get_fps() :.0f}')
 
     def render(self):
         self.ctx.clear(color=BG_COLOR)
         self.scene.render()
         pg.display.flip()
+
+        # Render HUD overlay on top (uses pygame 2D blit after GL flip)
+        if self.ai_agent:
+            hud_surface = pg.display.get_surface()
+            self.ai_agent.render_hud(hud_surface)
+            pg.display.flip()
 
     def handle_events(self):
         for event in pg.event.get():
@@ -64,6 +102,11 @@ class VoxelEngine:
             self.handle_events()
             self.update()
             self.render()
+
+        # Clean up AI agent
+        if self.ai_agent:
+            self.ai_agent.stop()
+
         pg.quit()
         sys.exit()
 

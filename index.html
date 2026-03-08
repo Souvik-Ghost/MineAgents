@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MineAgents — A lightweight browser-based voxel engine with an autonomous AI bot" />
+  <title>MineAgents — Voxel World</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD Overlay -->
+  <div id="hud">
+    <div id="hud-panel">
+      <div id="hud-title">
+        <span id="status-dot"></span>
+        <span>MINEAGENTS</span>
+      </div>
+      <div id="hud-stats">
+        <div class="hud-row"><span class="hud-label">FPS</span><span id="hud-fps">0</span></div>
+        <div class="hud-row"><span class="hud-label">POS</span><span id="hud-pos">0, 0, 0</span></div>
+        <div class="hud-row"><span class="hud-label">ACTION</span><span id="hud-action">idle</span></div>
+        <div class="hud-row"><span class="hud-label">REASON</span><span id="hud-reason">initializing</span></div>
+      </div>
+    </div>
+
+    <div id="hud-controls">
+      <button id="btn-bot-toggle" class="hud-btn active">🤖 BOT ON</button>
+      <button id="btn-play" class="hud-btn">🎮 PLAY</button>
+    </div>
+  </div>
+
+  <!-- Crosshair -->
+  <div id="crosshair">+</div>
+
+  <!-- Start screen -->
+  <div id="start-screen">
+    <div id="start-content">
+      <h1>MINE<span class="accent">AGENTS</span></h1>
+      <p>A lightweight voxel world with an autonomous AI bot</p>
+      <div id="start-buttons">
+        <button id="btn-start-bot" class="start-btn primary">🤖 Watch Bot Play</button>
+        <button id="btn-start-play" class="start-btn">🎮 Play Yourself</button>
+      </div>
+      <p class="hint">WASD to move · Mouse to look · Q/E up/down · Click to interact</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
