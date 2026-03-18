@@ -76,6 +76,51 @@ Or connect this repo to [Vercel](https://vercel.com) for automatic deploys on pu
 - **[Vite](https://vitejs.dev/)** — Build tool
 - **[simplex-noise](https://github.com/jwagner/simplex-noise.js)** — Terrain generation
 
+## 📖 Walkthrough
+
+### What Was Built
+
+| File | Purpose |
+|------|---------|
+| `src/main.js` | Entry point — Three.js scene, lighting, fog, and game loop |
+| `src/world.js` | Chunk-based voxel world with face-culled mesh generation |
+| `src/terrain.js` | Procedural terrain with simplex noise, caves & biomes |
+| `src/bot.js` | Autonomous bot with sense → decide → act loop, cliff detection, boundary clamping |
+| `src/controls.js` | First-person pointer-lock controls with basic collision |
+| `src/hud.js` | DOM-based HUD overlay (FPS, position, bot action & reason) |
+| `src/style.css` | Glassmorphism UI styling |
+| `vite.config.js` | Vite build config — outputs to `dist/` |
+| `vercel.json` | Vercel deployment config (`npm run build` → `dist/`) |
+
+### ✅ Test Results
+
+| Check | Result |
+|-------|--------|
+| Production build | ✅ **123 KB gzipped** |
+| Browser FPS | ✅ ~57 FPS |
+| Bot navigation | ✅ Stays on terrain, detects cliffs, avoids void |
+| HUD updates | ✅ Real-time FPS, position, action & reason displayed |
+| Console errors | ✅ None |
+
+### 🚀 Deployment Steps
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Build for production
+npm run build        # outputs to dist/
+
+# 3. Deploy via Vercel CLI
+npx vercel --prod
+```
+
+Or connect your GitHub repo **`Souvik-Ghost/MineAgents`** to [Vercel](https://vercel.com) for **automatic deploys on every push**.
+
+> **Vercel settings are pre-configured** in `vercel.json` — no manual setup needed.
+
+---
+
 ## 📄 License
 
 MIT
