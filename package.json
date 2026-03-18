@@ -15,6 +15,7 @@
   "author": "Souvik-Ghost",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "simplex-noise": "^4.0.3",
     "three": "^0.175.0"
   },

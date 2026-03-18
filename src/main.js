@@ -4,6 +4,10 @@
  */
 
 import * as THREE from 'three';
+import { inject } from '@vercel/analytics';
+
+// Initialize Vercel Analytics
+inject();
 import { VoxelWorld, CHUNK_SIZE, WORLD_W, WORLD_H, WORLD_D } from './world.js';
 import { Controls } from './controls.js';
 import { Bot } from './bot.js';
