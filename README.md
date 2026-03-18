@@ -102,6 +102,10 @@ Or connect this repo to [Vercel](https://vercel.com) for automatic deploys on pu
 | HUD updates | ✅ Real-time FPS, position, action & reason displayed |
 | Console errors | ✅ None |
 
+### 🎬 Bot Demo
+
+![Bot exploration and cliff detection demo](screenshot/bot_demo.webp)
+
 ### 🚀 Deployment Steps
 
 ```bash
