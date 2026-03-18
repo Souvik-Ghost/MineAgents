@@ -1,0 +1,5 @@
+# Ignore Python files — this is a Vite/Node.js web app
+requirements.txt
+*.py
+__pycache__/
+docker-compose.yml
